@@ -3,7 +3,6 @@
  */
 
 var path = require('path');
-
 var webpack = require('webpack');
 
 module.exports = {
@@ -27,6 +26,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],
+
     module: {
         preLoaders: [
             {

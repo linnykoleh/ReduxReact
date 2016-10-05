@@ -5,14 +5,19 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import User from '../components/User';
+import Page from '../components/Page';
+import { bindActionCreators } from 'redux';
+import * as pageActions from '../actions/PageActions';
 
 class App extends React.Component {
 
     render() {
-        const { name, surname, age } = this.props.user;
+        const { user, page } = this.props;
+        const { setYear } = this.props.pageActions;
         return <div>
-            <p>Привет из App, {name} {surname}!</p>
-            <p>Тебе уже {age} ?</p>
+            <User name={user.name}/>
+            <Page year={page.year} photos={page.photos} setYear={setYear}/>
         </div>
     }
 
@@ -20,11 +25,19 @@ class App extends React.Component {
 
 function mapStateToProps (state) {
     return {
-        user: state
+        user: state.user,
+        page: state.page
     }
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch) {
+    return {
+        pageActions: bindActionCreators(pageActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
 /**
  connect -  помогает нам получить в качестве props для компонента <App /> данные из store
 
