@@ -6,15 +6,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export class App extends  React.Component {
-
-    constructor(props) {
-        super(props);
-    }
+class App extends React.Component {
 
     render() {
         console.log(this.props);
-        return <div>Привет из App, { this.props.user }!</div>
+        return <div>Привет из App, { this.props.user.user }!</div>
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Created by olinnyk on 10/5/16.
+ * Created by dp-ptcstd-34 on 10/5/2016.
  */
 
 const initialState = {
