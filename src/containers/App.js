@@ -7,17 +7,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import User from '../components/User';
 import Page from '../components/Page';
-import { bindActionCreators } from 'redux';
-import * as pageActions from '../actions/PageActions';
+/*import { bindActionCreators } from 'redux';*/
+import { setYearAction, getPhotos } from '../actions/PageActions';
+/*import { SET_YEAR } from '../constants/Page';*/
 
 class App extends React.Component {
 
     render() {
-        const { user, page } = this.props;
-        const { setYear } = this.props.pageActions;
+        const { user, page, setYear, getPhotos } = this.props;
         return <div>
             <User name={user.name}/>
-            <Page year={page.year} photos={page.photos} setYear={setYear}/>
+            <Page year={page.year} photos={page.photos} setYear={setYear} getPhotos={getPhotos} fetching={page.fetching} />
         </div>
     }
 
@@ -32,7 +32,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        pageActions: bindActionCreators(pageActions, dispatch)
+        setYear: year => dispatch(setYearAction(year)), /* или  year => dispatch({type: SET_YEAR, payload: year}) или bindActionCreators(pageActions, dispatch)*/
+        getPhotos: year => dispatch(getPhotos(year))
     }
 }
 
@@ -46,4 +47,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(App)
  У нас был компонент <App /> , а на выходе получился <Connected(App)>
 
  https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+
+ Однонаправленного потока данных : (юзер кликнул - действие вызвалось - редьюсер изменил состояние -компонент отрисовал изменения)
 */
